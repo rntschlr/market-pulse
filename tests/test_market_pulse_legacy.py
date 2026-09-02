@@ -164,8 +164,10 @@ class TestMain(unittest.TestCase):
         }
 
         with patch.object(sys, 'argv', ['market_pulse.py']):
-            market_pulse.main()
+            with self.assertRaises(SystemExit) as exit_ctx:
+                market_pulse.main()
 
+        self.assertEqual(exit_ctx.exception.code, 0)
         mock_fetch.assert_called_once()
         # Check that default coins are used
         call_args = mock_fetch.call_args[0][0]
@@ -180,8 +182,10 @@ class TestMain(unittest.TestCase):
         }
 
         with patch.object(sys, 'argv', ['market_pulse.py', 'cardano']):
-            market_pulse.main()
+            with self.assertRaises(SystemExit) as exit_ctx:
+                market_pulse.main()
 
+        self.assertEqual(exit_ctx.exception.code, 0)
         mock_fetch.assert_called_once()
         call_args = mock_fetch.call_args[0][0]
         self.assertIn('cardano', call_args)
@@ -195,8 +199,10 @@ class TestMain(unittest.TestCase):
         }
 
         with patch.object(sys, 'argv', ['market_pulse.py', '--vs', 'eur']):
-            market_pulse.main()
+            with self.assertRaises(SystemExit) as exit_ctx:
+                market_pulse.main()
 
+        self.assertEqual(exit_ctx.exception.code, 0)
         mock_fetch.assert_called_once()
         # Check currency argument
         self.assertEqual(mock_fetch.call_args[0][1], 'eur')
