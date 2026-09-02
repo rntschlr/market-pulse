@@ -20,3 +20,10 @@ market-pulse = "market_pulse:main"
 
 [tool.setuptools]
 py-modules = ["market_pulse"]
+
+[tool.pytest.ini_options]
+# Tests import market_pulse from the repo root. Bare `pytest` (unlike
+# `python -m pytest`) does not put the working directory on sys.path, so make
+# it explicit rather than depending on how the runner is invoked.
+pythonpath = ["."]
+testpaths = ["tests"]
