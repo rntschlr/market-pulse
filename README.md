@@ -1,6 +1,6 @@
 # market-pulse
 
-Real-time stock and crypto prices in your terminal with color-coded 24h changes.
+Real-time crypto prices in your terminal with color-coded 24h changes.
 
 ![Python](https://img.shields.io/badge/python-3.10+-blue)
 
@@ -9,6 +9,13 @@ Real-time stock and crypto prices in your terminal with color-coded 24h changes.
 ```bash
 pip install -r requirements.txt
 python market_pulse.py
+```
+
+Or install it as a local CLI:
+
+```bash
+pip install -e .
+market-pulse
 ```
 
 ## Usage
@@ -39,6 +46,14 @@ python market_pulse.py --vs eur
 ## Data Source
 
 Prices from [CoinGecko](https://www.coingecko.com/en/api) free API. No API key required.
+
+## Quality Checks
+
+```bash
+pip install -e ".[dev]"
+pytest
+python -m py_compile market_pulse.py
+```
 
 ## License
 
